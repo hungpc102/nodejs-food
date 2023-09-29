@@ -1,0 +1,40 @@
+GET http://localhost:3000
+
+###
+POST http://localhost:3000/user/register
+Content-Type: application/json
+
+{   
+    "USER_NAME": "Hung",
+    "USER_PHONE":"0767822812",
+    "USER_EMAIL": "Hung12@gmail.com",
+    "USER_PASSWORD": "123456"
+}
+###
+POST http://localhost:3000/user/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTA0NCwiZXhwIjoxNzI3NTIyNjQ0fQ.rivvVmcpD2yMXWAYANgi-ssTdnJ3vxjQejpNO-iR9_M"
+}
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{   
+ 
+    "USER_EMAIL": "hung12@gmail.com",
+    "USER_PASSWORD": "123456"
+}
+###
+DELETE http://localhost:3000/user/logout 
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTA0NCwiZXhwIjoxNzI3NTIyNjQ0fQ.rivvVmcpD2yMXWAYANgi-ssTdnJ3vxjQejpNO-iR9_M"
+}
+
+###
+GET http://localhost:3000/user/getlists
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTA0NCwiZXhwIjoxNjk1OTY1MTA0fQ.9E6xw4lrQwUKv3dvpxrVa3RPatvnb-OJbtI2DQI7U24
