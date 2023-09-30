@@ -2,24 +2,27 @@ const UserSchema = require('../Models/User.model')
 const {userValidate} =  require('../helpers/validation')
 const {signAccessToken, signRefreshToken, verifyRefreshToken} = require('../helpers/jwt_service');
 const client = require('../helpers/connections_redis')
+const createError = require('http-errors')
+
 
 module.exports = {
-    register:  async (req, res, next) => {
+    register: async (req, res, next) => {
+        try {
+            const { USER_NAME, USER_PHONE, USER_EMAIL, USER_PASSWORD } = req.body;
+            const { error } = userValidate(req.body, isRegister = true);
     
-        try{
-            const {USER_NAME ,USER_PHONE, USER_EMAIL, USER_PASSWORD} =req.body
-            const {error}= userValidate(req.body, isRegister = true)
-            console.log(`::::::::error validation`, error)
-            if(error){
-                throw createError(error.details[0].message)
+            if (error) {
+                // Trả về lỗi dưới dạng phản hồi JSON
+                return res.status(400).json({ error: error.details[0].message });
             }
     
-            const isExits = await UserSchema.findOne({
-                where: {USER_EMAIL}
-            })
+            const isExists = await UserSchema.findOne({
+                where: { USER_EMAIL }
+            });
     
-            if(isExits){
-                throw createError.Conflict(`${USER_EMAIL} has ready been registered`)
+            if (isExists) {
+                // Trả về lỗi dưới dạng phản hồi JSON
+                return res.status(409).json({ error: `${USER_EMAIL} has already been registered` });
             }
     
             const user = new UserSchema({
@@ -27,17 +30,16 @@ module.exports = {
                 USER_PASSWORD,
                 USER_NAME,
                 USER_PHONE
-            })
-            const saveUser = await user.save()
+            });
+            const saveUser = await user.save();
     
-            return res.json({
+            return res.status(200).json({
                 status: 'okay',
                 elements: saveUser
-            })
+            });
     
-        } catch(error){
-            // console.error(error); 
-            next(error)
+        } catch (error) {
+            next(error);
         }
     },
     refreshToken:async(req, res, next) => {
@@ -59,37 +61,40 @@ module.exports = {
         }
     },
     login: async (req, res, next) => {
-
-        try{
-            const {error}= userValidate(req.body,isRegister = false)
-            if(error){
-                throw createError(error.details[0].message)
+        try {
+            const { error } = userValidate(req.body, (isRegister = false));
+            if (error) {
+                return res.status(400).json({ error: error.details[0].message });
             }
-            const{USER_EMAIL, USER_PASSWORD} = req.body
+    
+            const { USER_EMAIL, USER_PASSWORD } = req.body;
     
             const user = await UserSchema.findOne({
-                where: {USER_EMAIL}
-            })
-            if(!user){
-                throw createError.NotFound('User not resgistered')
-            }
-            const isValid = await user.isCheckPassword(USER_PASSWORD)
-    
-            if(!isValid){
-                throw createError.Unauthorized()
-            }
-    
-            const accessToken = await signAccessToken(user.USER_ID)
-            const refreshToken =  await signRefreshToken(user.USER_ID)
-            res.json({
-                accessToken,
-                refreshToken
+                where: { USER_EMAIL },
             });
     
-        } catch(error){
-            next(error)
+            if (!user) {
+                return res.status(404).json({ error: 'Người dùng chưa đăng kí' });
+            }
+    
+            const isValid = await user.isCheckPassword(USER_PASSWORD);
+    
+            if (!isValid) {
+                return res.status(401).json({ error: 'Tài khoản hoặc mật khẩu chưa chính xác' });
+            }
+    
+            const accessToken = await signAccessToken(user.USER_ID);
+            const refreshToken = await signRefreshToken(user.USER_ID);
+    
+            res.json({
+                accessToken,
+                refreshToken,
+            });
+        } catch (error) {
+            next(error);
         }
     },
+    
     logout:async(req, res, next) => {
         try{
             const {refreshToken} = req.body
@@ -122,5 +127,17 @@ module.exports = {
         res.json({
             listUsers
         })
-    }
+    },
+    getSaveLogin:async(req, res, next) => {
+        console.log(req.headers)
+        const statusLogin = 
+            {
+            status: 'true'
+            }
+        
+        
+        res.json({
+            statusLogin
+        })
+    },
 }

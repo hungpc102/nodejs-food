@@ -15,7 +15,7 @@ POST http://localhost:3000/user/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTA0NCwiZXhwIjoxNzI3NTIyNjQ0fQ.rivvVmcpD2yMXWAYANgi-ssTdnJ3vxjQejpNO-iR9_M"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTQ4NSwiZXhwIjoxNzI3NTIzMDg1fQ.WYfQ5f1YafEXa71pqXB1PhU24gPRhOB8aOel0Vzs_kU"
 }
 
 ###
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 {   
  
-    "USER_EMAIL": "hung12@gmail.com",
+    "USER_EMAIL": "hungdz@gmail.com",
     "USER_PASSWORD": "123456"
 }
 ###
@@ -32,9 +32,13 @@ DELETE http://localhost:3000/user/logout
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTA0NCwiZXhwIjoxNzI3NTIyNjQ0fQ.rivvVmcpD2yMXWAYANgi-ssTdnJ3vxjQejpNO-iR9_M"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTQ4NSwiZXhwIjoxNzI3NTIzMDg1fQ.WYfQ5f1YafEXa71pqXB1PhU24gPRhOB8aOel0Vzs_kU"
 }
 
 ###
 GET http://localhost:3000/user/getlists
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwMjgsImlhdCI6MTY5NTk2NTA0NCwiZXhwIjoxNjk1OTY1MTA0fQ.9E6xw4lrQwUKv3dvpxrVa3RPatvnb-OJbtI2DQI7U24
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUwMTAsImlhdCI6MTY5NjAxMDc1NSwiZXhwIjoxNjk2MDE3OTU1fQ.Cs8H2lsvw_49UmZzv-84NaRkDPFhaiDI1XgVVlTHBtc
+
+###
+GET http://localhost:3000/user/getSaveLogin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUwMTAsImlhdCI6MTY5NjAxMDc1NSwiZXhwIjoxNjk2MDE3OTU1fQ.Cs8H2lsvw_49UmZzv-84NaRkDPFhaiDI1XgVVlTHBtc

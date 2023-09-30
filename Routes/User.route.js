@@ -1,6 +1,5 @@
 const express = require('express');
 const route = express.Router();
-const createError = require('http-errors')
 
 const {vefifyAccessToken} = require('../helpers/jwt_service');
 const UserController = require('../Controllers/User.controller')
@@ -17,5 +16,7 @@ route.post('/login', UserController.login);
 route.delete('/logout', UserController.logout);
 
 route.get('/getlists', vefifyAccessToken, UserController.getlists)
+
+route.get('/getSaveLogin', vefifyAccessToken, UserController.getSaveLogin)
 
 module.exports = route;
