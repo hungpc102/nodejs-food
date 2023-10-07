@@ -8,7 +8,7 @@ const createError = require('http-errors')
 module.exports = {
     register: async (req, res, next) => {
         try {
-            const { USER_NAME, USER_PHONE, USER_EMAIL, USER_PASSWORD } = req.body;
+            const { USER_NAME, USER_PHONE, USER_EMAIL, USER_PASSWORD, USER_IS_RESTAURANT} = req.body;
             const { error } = userValidate(req.body, isRegister = true);
     
             if (error) {
@@ -24,12 +24,14 @@ module.exports = {
                 // Trả về lỗi dưới dạng phản hồi JSON
                 return res.status(409).json({ error: `${USER_EMAIL} has already been registered` });
             }
+
     
             const user = new UserSchema({
                 USER_EMAIL,
                 USER_PASSWORD,
                 USER_NAME,
-                USER_PHONE
+                USER_PHONE,
+                USER_IS_RESTAURANT,
             });
             const saveUser = await user.save();
     
@@ -67,8 +69,8 @@ module.exports = {
                 return res.status(400).json({ error: error.details[0].message });
             }
     
-            const { USER_EMAIL, USER_PASSWORD } = req.body;
-    
+            const { USER_EMAIL, USER_PASSWORD , USER_IS_RESTAURANT} = req.body;
+
             const user = await UserSchema.findOne({
                 where: { USER_EMAIL },
             });
@@ -82,13 +84,20 @@ module.exports = {
             if (!isValid) {
                 return res.status(401).json({ error: 'Tài khoản hoặc mật khẩu chưa chính xác' });
             }
+
+            let isRestaurant = false;
+
+            // console.log(user.USER_IS_RESTAURANT)
+            if (user.USER_IS_RESTAURANT === true) {
+                isRestaurant = true;
+            }
     
-            const accessToken = await signAccessToken(user.USER_ID);
+            const accessToken = await signAccessToken(user.USER_ID, isRestaurant);
             const refreshToken = await signRefreshToken(user.USER_ID);
     
             res.json({
                 accessToken,
-                refreshToken,
+                refreshToken
             });
         } catch (error) {
             next(error);
@@ -130,14 +139,23 @@ module.exports = {
     },
     getSaveLogin:async(req, res, next) => {
         console.log(req.headers)
-        const statusLogin = 
+        const statusLogin = [
             {
-            status: 'true'
+                status: 'true'
             }
-        
-        
+        ]
         res.json({
             statusLogin
         })
     },
+    protectedRoute: (req, res, next) => {
+        const isRestaurant = req.payload.isRestaurant;
+        console.log(isRestaurant)
+        console.log('heheh')
+        if (isRestaurant === true) {
+            res.json('isRestaurant')
+        } else{
+            res.status(403).json({ message: 'Đây không phải là tài khoản nhà hàng' });
+        }
+    }
 }

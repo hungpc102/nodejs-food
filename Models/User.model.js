@@ -14,7 +14,7 @@ const UserSchema = sequelize.define('USERS', {
   },
   USER_NAME: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
 
   },
   USER_EMAIL: {
@@ -28,16 +28,16 @@ const UserSchema = sequelize.define('USERS', {
   USER_PASSWORD: {
     type: DataTypes.STRING,
     allowNull: false,
-   
-
   },
   USER_PHONE: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
     unique: true ,
-
-
   },
+  USER_IS_RESTAURANT: {
+    type: DataTypes.INTEGER, 
+    allowNull: true, 
+  }
 }, {
   // Đặt tên bảng SQL nếu bạn muốn sử dụng tên bảng khác
   tableName: 'USERS',

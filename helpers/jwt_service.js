@@ -2,14 +2,16 @@ const JWT = require ('jsonwebtoken')
 const createError = require("http-errors")
 const client = require('../helpers/connections_redis')
 
-const signAccessToken = async (userId) =>{
+const signAccessToken = async (userId, isRestaurant) =>{
     return new Promise((resolve, reject) => {
+     
         const payload = {
-            userId
+            userId,
+            isRestaurant
         }
         const secret = process.env.ACCESS_TOKEN_SECRET
         const options = {
-            expiresIn: '2h' 
+            expiresIn: '24h' 
         }
 
         JWT.sign(payload, secret, options, (err, token) => {
@@ -34,7 +36,10 @@ const vefifyAccessToken = (req, res, next) => {
             }
             return next(createError.Unauthorized(err.message))
         }
+      
         req.payload = payload
+        console.log(req.payload)
+   
         next()
     })
 

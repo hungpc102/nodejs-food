@@ -1,0 +1,21 @@
+GET http://localhost:3000
+
+###
+GET http://localhost:3000/food/get-all
+
+
+
+###
+POST  http://localhost:3000/food/create-food
+Content-Type: multipart/form-data
+
+{
+    "FOOD_NAME": "food",
+    "FOOD_INFO": "hello",
+    "FOOD_PRICE": 300,
+    "FOOD_QUANTITY": 200,
+    "CATEGORY": "huhu"
+}
+
+###
+GET  http://localhost:3000/food/get-image

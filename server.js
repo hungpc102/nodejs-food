@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const UserRoute = require('./Routes/User.route')
+const FoodRoute = require('./Routes/Food.route')
 const createError = require('http-errors')
 require('dotenv').config()
 // require('./helpers/connections_mongodb')
@@ -11,9 +12,14 @@ app.get('/', (req, res, next) => {
     res.send('Home page')
 })
 
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
 app.use('/user', UserRoute)
+
+app.use('/food', FoodRoute)
+
 
 app.use((req, res, next) => {
     // const error = new Error('Not Found')

@@ -6,6 +6,7 @@ const userValidate = (data, isRegister = true) => {
     USER_PASSWORD: Joi.string().min(4).max(32).required(),
     USER_PHONE: isRegister ? Joi.string().min(9).max(15).required() : Joi.string().min(9).max(15),
     USER_NAME: isRegister ? Joi.string().required() : Joi.string(),
+    USER_IS_RESTAURANT: Joi.number()
   });
 
   return userSchema.validate(data);
