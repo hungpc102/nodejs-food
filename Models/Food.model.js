@@ -15,7 +15,7 @@ const FoodSchema = sequelize.define('FOODS', {
         allowNull: false,
       },
       FOOD_INFO: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       FOOD_PICTURE: {

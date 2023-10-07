@@ -8,29 +8,29 @@ module.exports = {
  
   getAll: async (req, res, next) => {
     try {
-      // Lấy tất cả dữ liệu món ăn
-      const foods = await FoodSchema.findAll();
-  
-      // Chuyển đổi đường dẫn ảnh thành đường dẫn tuyệt đối để frontend có thể hiển thị
-      const foodsWithAbsoluteImagePaths = await Promise.all(foods.map(async (food) => {
-        const imagePath = food.FOOD_PICTURE;
-        const imageContent = await fs.promises.readFile(imagePath, 'base64');
-        const absoluteImagePath = `${req.protocol}://${req.get('host')}${imagePath}`;
-        
-        return {
-          ...food.toJSON(),
-          FOOD_PICTURE: absoluteImagePath,
-          IMAGE_CONTENT: imageContent,
-        };
-      }));
-  
-      // Trả về dữ liệu cho frontend
-      res.json(foodsWithAbsoluteImagePaths);
-    } catch (err) {
-      console.error('Lỗi truy vấn CSDL:', err);
-      next(err);
+        const foods = await FoodSchema.findAll();
+
+        if (!foods || foods.length === 0) {
+            res.status(404).json({ error: 'Không tìm thấy dữ liệu' });
+            return;
+        }
+
+        // Chuyển đổi binary thành base64 (nếu cần)
+        const foodsWithBase64 = foods.map(food => {
+            if (food.FOOD_PICTURE) {
+                food.FOOD_PICTURE = food.FOOD_PICTURE.toString('base64');
+            }
+            return food;  
+        });
+
+        // Trả về dữ liệu cho frontend
+        res.json({ foods: foodsWithBase64 });
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu:', error);
+        res.status(500).json({ error: 'Đã có lỗi xảy ra' });
     }
   },
+
   createFood:async (req, res, next) => {
     try {
       // Lấy dữ liệu từ body request
