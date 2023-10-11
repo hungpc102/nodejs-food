@@ -1,7 +1,7 @@
 const express = require('express');
 const route = express.Router();
 
-const { vefifyAccessToken} = require('../helpers/jwt_service');
+const { verifyAccessToken} = require('../helpers/jwt_service');
 const UserController = require('../Controllers/User.controller')
 
 
@@ -13,12 +13,12 @@ route.post('/refresh-token', UserController.refreshToken)
 
 route.post('/login', UserController.login);
 
-route.post('/protected-route',vefifyAccessToken, UserController.protectedRoute);
+route.post('/protected-route',verifyAccessToken, UserController.protectedRoute);
 
 route.delete('/logout', UserController.logout);
 
-route.get('/getlists', vefifyAccessToken, UserController.getlists)
+route.get('/getlists', verifyAccessToken, UserController.getlists)
 
-route.get('/getSaveLogin', vefifyAccessToken, UserController.getSaveLogin)
+route.get('/getSaveLogin', verifyAccessToken, UserController.getSaveLogin)
 
 module.exports = route;

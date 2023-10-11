@@ -11,7 +11,7 @@ const signAccessToken = async (userId, isRestaurant) =>{
         }
         const secret = process.env.ACCESS_TOKEN_SECRET
         const options = {
-            expiresIn: '24h' 
+            expiresIn: '4h' 
         }
 
         JWT.sign(payload, secret, options, (err, token) => {
@@ -21,7 +21,7 @@ const signAccessToken = async (userId, isRestaurant) =>{
     })
 }
 
-const vefifyAccessToken = (req, res, next) => {
+const verifyAccessToken = (req, res, next) => {
     if(!req.headers['authorization']){
         return next(createError.Unauthorized())
     }
@@ -38,7 +38,7 @@ const vefifyAccessToken = (req, res, next) => {
         }
       
         req.payload = payload
-        console.log(req.payload)
+        // console.log(req.payload)
    
         next()
     })
@@ -88,7 +88,7 @@ const verifyRefreshToken = async (refreshToken) => {
 
 module.exports = {
     signAccessToken,
-    vefifyAccessToken,
+    verifyAccessToken,
     signRefreshToken,
     verifyRefreshToken
 }

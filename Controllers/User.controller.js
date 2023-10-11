@@ -12,7 +12,6 @@ module.exports = {
             const { error } = userValidate(req.body, isRegister = true);
     
             if (error) {
-                // Trả về lỗi dưới dạng phản hồi JSON
                 return res.status(400).json({ error: error.details[0].message });
             }
     
@@ -21,7 +20,6 @@ module.exports = {
             });
     
             if (isExists) {
-                // Trả về lỗi dưới dạng phản hồi JSON
                 return res.status(409).json({ error: `${USER_EMAIL} has already been registered` });
             }
 
@@ -87,7 +85,6 @@ module.exports = {
 
             let isRestaurant = false;
 
-            // console.log(user.USER_IS_RESTAURANT)
             if (user.USER_IS_RESTAURANT === true) {
                 isRestaurant = true;
             }
@@ -139,11 +136,7 @@ module.exports = {
     },
     getSaveLogin:async(req, res, next) => {
         console.log(req.headers)
-        const statusLogin = [
-            {
-                status: 'true'
-            }
-        ]
+        const statusLogin = true
         res.json({
             statusLogin
         })
@@ -157,5 +150,53 @@ module.exports = {
         } else{
             res.status(403).json({ message: 'Đây không phải là tài khoản nhà hàng' });
         }
-    }
+    },
+    updateProfile:async (req, res, next) => {
+        try {
+            const userId = req.params.id;
+            const { USER_NAME, USER_PHONE, USER_PASSWORD, USER_IS_RESTAURANT } = req.body;
+    
+            const existingUser = await UserSchema.findByPk(userId);
+            if (!existingUser) {
+                return res.status(404).json({ error: `Người dùng với ID ${userId} không tồn tại` });
+            }
+    
+            existingUser.USER_NAME = USER_NAME;
+            existingUser.USER_PHONE = USER_PHONE;
+            existingUser.USER_PASSWORD = USER_PASSWORD;
+            existingUser.USER_IS_RESTAURANT = USER_IS_RESTAURANT;
+    
+            await existingUser.save();
+    
+            return res.status(200).json({
+                status: 'okay',
+                elements: existingUser
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
+    getUserId: async (req, res, next) => {
+        const { id } = req.params; // Lấy ID từ URL
+        try {
+          const food = await UserSchema.findOne({ where: { USER_ID: id } });
+      
+          if (!food) {
+            res.status(404).json({ error: 'Không tìm thấy dữ liệu' });
+            return;
+          }
+      
+          // Chuyển đổi binary thành base64 (nếu cần)
+          if (food.FOOD_PICTURE) {
+            food.FOOD_PICTURE = food.FOOD_PICTURE.toString('base64');
+          }
+      
+          // Trả về dữ liệu cho frontend
+          res.json({ food });
+        } catch (error) {
+          console.error('Lỗi khi lấy dữ liệu theo ID:', error);
+          res.status(500).json({ error: 'Đã có lỗi xảy ra' });
+        }
+      },
+
 }
