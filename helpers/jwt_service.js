@@ -11,7 +11,7 @@ const signAccessToken = async (userId, isRestaurant) =>{
         }
         const secret = process.env.ACCESS_TOKEN_SECRET
         const options = {
-            expiresIn: '4h' 
+            expiresIn: '24h' 
         }
 
         JWT.sign(payload, secret, options, (err, token) => {
@@ -38,7 +38,6 @@ const verifyAccessToken = (req, res, next) => {
         }
       
         req.payload = payload
-        // console.log(req.payload)
    
         next()
     })

@@ -16,23 +16,23 @@ const FoodSchema = sequelize.define('FOODS', {
       },
       FOOD_INFO: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       FOOD_PICTURE: {
         type: DataTypes.BLOB,
-        allowNull: true, 
+        allowNull: false, 
       },
       FOOD_PRICE: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: true,
+        allowNull: false,
       },
       FOOD_QUANTITY: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       CATEGORY: {
         type: DataTypes.STRING(50),
-        allowNull: true,
+        allowNull: false,
       },
 },
       {

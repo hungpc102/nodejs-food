@@ -3,7 +3,6 @@ const route = express.Router();
 
 const {verifyAccessToken} = require('../helpers/jwt_service');
 const FoodController = require('../Controllers/Food.controller')
-const FoodSchema = require('../Models/Food.model')
 
 const multer = require('multer');
 
@@ -20,8 +19,9 @@ route.get('/getById/:id', FoodController.getFoodId)
 
 route.get('/search', FoodController.searchFood)
 
-route.post('/create-food', upload.single('file'), FoodController.createFood)
+route.post('/create-food',verifyAccessToken, upload.single('file'), FoodController.createFood)
 
+route.delete('/delete-food/:id',verifyAccessToken, FoodController.deleteFood)
 
 
 module.exports = route;

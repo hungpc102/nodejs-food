@@ -21,4 +21,9 @@ route.get('/getlists', verifyAccessToken, UserController.getlists)
 
 route.get('/getSaveLogin', verifyAccessToken, UserController.getSaveLogin)
 
+route.get('/getById/:id', UserController.getUserId)
+
+route.put('/updatePassword/:id', verifyAccessToken, UserController.updatePassword)
+
+
 module.exports = route;

@@ -116,5 +116,21 @@ module.exports = {
       next(error);
     }
   },
+  deleteFood:async (req, res) => {
+    const foodId = req.params.id;
+  
+    try {
+      const food = await FoodSchema.findByPk(foodId);
+  
+      if (!food) {
+        return res.status(404).json({ error: 'Món ăn không tồn tại' });
+      }
+  
+      await food.destroy();
+      return res.status(204).send(); 
+    } catch (error) {
+      return res.status(500).json({ error: 'Lỗi khi xoá món ăn' });
+    }
+  }
 
 }

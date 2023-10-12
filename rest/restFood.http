@@ -28,3 +28,12 @@ GET http://localhost:3000/food/search/?search=Burger%20loại%201
 
 ###
 GET http://localhost:3000/food/search?search=Burger
+
+###
+DELETE http://localhost:3000/food/delete-food/2058
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcwMTQsImlzUmVzdGF1cmFudCI6dHJ1ZSwiaWF0IjoxNjk3MTM5NjYwLCJleHAiOjE2OTcxNDY4NjB9.yDFmxst9LXM4WzmWxx6sD91rc9GkkW-RijCR1gslx2Y
+
+
+
+
+
