@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {   
  
-    "USER_EMAIL": "hung12@gmail.com",
+    "USER_EMAIL": "hungdz@gmail.com",
     "USER_PASSWORD": "123456"
 }
 ###
@@ -33,7 +33,7 @@ DELETE http://localhost:3000/user/logout
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUwMTAsImlhdCI6MTY5NjA5OTY3MywiZXhwIjoxNzI3NjU3MjczfQ._Ep6XsH628OiqzrxzF2HCV9aovPVEn9kA-wiqmqQY9g"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3LCJpYXQiOjE2OTc3Mjk3MTIsImV4cCI6MTcyOTI4NzMxMn0.BxG0K6D8M1hZ1dMb64WyiaqJn2lnfWjT34jHNzk2tEo"
 }
 
 ###
@@ -53,7 +53,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcwMTQsI
 GET http://localhost:3000/user/getById/10017
 
 ###
-PUT http://localhost:3000/user/updatePassword/10017
+PATCH http://localhost:3000/user/updatePassword/10017
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3LCJpc1Jlc3RhdXJhbnQiOmZhbHNlLCJpYXQiOjE2OTcxMTAwOTUsImV4cCI6MTY5NzEyNDQ5NX0.3zalokl6jA6VuFdRuPkNteOLHMYAX9Yt2RAZ9LrOFtc
 Content-Type: application/json
 
@@ -61,5 +61,8 @@ Content-Type: application/json
     "USER_PASSWORD": "123456",
     "NEW_USER_PASSWORD": "123123"
 }
+
+
+
 
     

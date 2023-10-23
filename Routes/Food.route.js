@@ -23,6 +23,9 @@ route.post('/create-food',verifyAccessToken, upload.single('file'), FoodControll
 
 route.delete('/delete-food/:id',verifyAccessToken, FoodController.deleteFood)
 
+route.put('/update-food/:id',verifyAccessToken, upload.none(), FoodController.updateFood)
+
+
 
 module.exports = route;
 

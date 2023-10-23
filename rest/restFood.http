@@ -33,7 +33,16 @@ GET http://localhost:3000/food/search?search=Burger
 DELETE http://localhost:3000/food/delete-food/2058
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcwMTQsImlzUmVzdGF1cmFudCI6dHJ1ZSwiaWF0IjoxNjk3MTM5NjYwLCJleHAiOjE2OTcxNDY4NjB9.yDFmxst9LXM4WzmWxx6sD91rc9GkkW-RijCR1gslx2Y
 
+###
+PUT http://localhost:3000/food/update-food/3059
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcwMTQsImlzUmVzdGF1cmFudCI6dHJ1ZSwiaWF0IjoxNjk3NDc2MzgzLCJleHAiOjE2OTc0ODM1ODN9.6xpdrdWZRBGNw-92Ly4voXRS5K2a8-XaI-pQzc4uaX0
+Content-Type: multipart/form-data
 
-
-
-
+{
+    "FOOD_NAME": "koko",
+    "FOOD_INFO": "koko",
+    "FOOD_PICTURE": "09EF9",
+    "FOOD_PRICE": 300,
+    "FOOD_QUANTITY": 200,
+    "CATEGORY": "koko"  
+}

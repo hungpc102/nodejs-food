@@ -2,6 +2,7 @@ const express = require('express');
 const route = express.Router();
 
 const { verifyAccessToken} = require('../helpers/jwt_service');
+
 const UserController = require('../Controllers/User.controller')
 
 
@@ -23,7 +24,7 @@ route.get('/getSaveLogin', verifyAccessToken, UserController.getSaveLogin)
 
 route.get('/getById/:id', UserController.getUserId)
 
-route.put('/updatePassword/:id', verifyAccessToken, UserController.updatePassword)
+route.patch('/updatePassword/:id', verifyAccessToken, UserController.updatePassword)
 
 
 module.exports = route;

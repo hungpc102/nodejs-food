@@ -1,7 +1,4 @@
 const FoodSchema = require('../Models/Food.model')
-const {signAccessToken, signRefreshToken, verifyRefreshToken} = require('../helpers/jwt_service');
-const client = require('../helpers/connections_redis')
-const createError = require('http-errors')
 const {Sequelize, Op } = require("sequelize");
 
 module.exports = {
@@ -130,6 +127,48 @@ module.exports = {
       return res.status(204).send(); 
     } catch (error) {
       return res.status(500).json({ error: 'Lỗi khi xoá món ăn' });
+    }
+  },
+  updateFood: async (req, res, next) => {
+    try {
+      const foodId = req.params.id; // Lấy ID từ URL
+      console.log(foodId)
+
+      // Parse the multipart form data
+     // Lấy dữ liệu từ body request
+     const { FOOD_NAME, FOOD_INFO, FOOD_PRICE, FOOD_QUANTITY, CATEGORY , FOOD_PICTURE } = req.body;
+      console.log(req.body)
+      const imageBuffer = Buffer.from(req.body.FOOD_PICTURE, 'base64');
+
+      // Tìm sản phẩm theo ID
+      const food = await FoodSchema.findByPk(foodId);
+
+      if (!food) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Sản phẩm không tồn tại',
+        });
+      }
+
+      // Cập nhật thông tin sản phẩm
+      food.FOOD_NAME = FOOD_NAME;
+      food.FOOD_INFO = FOOD_INFO;
+      food.FOOD_PRICE = FOOD_PRICE;
+      food.FOOD_QUANTITY = FOOD_QUANTITY;
+      food.CATEGORY = CATEGORY;
+      food.FOOD_PICTURE = imageBuffer;
+ 
+
+      // Lưu lại thông tin sản phẩm đã cập nhật
+      await food.save();
+
+      return res.status(200).json({
+        status: 'okay',
+        message: 'Sản phẩm đã được cập nhật',
+        updatedProduct: food,
+      });
+    } catch (error) {
+      next(error);
     }
   }
 
