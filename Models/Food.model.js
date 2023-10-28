@@ -35,10 +35,10 @@ const FoodSchema = sequelize.define('FOODS', {
         allowNull: false,
       },
 },
-      {
+{
         tableName: 'FOODS',
         timestamps: false, 
-    }
+}
 )
 
 module.exports = FoodSchema;

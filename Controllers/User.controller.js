@@ -208,6 +208,5 @@ module.exports = {
           console.error('Lỗi khi lấy dữ liệu theo ID:', error);
           res.status(500).json({ error: 'Đã có lỗi xảy ra' });
         }
-      },
-
+      }
 }

@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const UserRoute = require('./Routes/User.route')
 const FoodRoute = require('./Routes/Food.route')
+const CartRoute = require('./Routes/Cart.route')
+
 const createError = require('http-errors')
 require('dotenv').config()
 // require('./helpers/connections_mongodb')
@@ -19,6 +21,8 @@ app.use(express.urlencoded({extended: true}))
 app.use('/user', UserRoute)
 
 app.use('/food', FoodRoute)
+
+app.use('/cart', CartRoute)
 
 
 app.use((req, res, next) => {

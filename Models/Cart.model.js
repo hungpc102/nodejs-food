@@ -10,9 +10,17 @@ const CartSchema = sequelize.define('CARTS', {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        FOOD_CATEGORY: {
+        QUANTITY: {
             type: DataTypes.INTEGER,
             allowNull: false, 
+        },
+        CART_ID:{
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+            unique: true, 
+            field: 'CART_ID',
         }
     },
     {
@@ -20,5 +28,6 @@ const CartSchema = sequelize.define('CARTS', {
     timestamps: false, 
     }
 )
+
 
 module.exports = CartSchema;

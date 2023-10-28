@@ -2,7 +2,6 @@ const FoodSchema = require('../Models/Food.model')
 const {Sequelize, Op } = require("sequelize");
 
 module.exports = {
- 
   getAll: async (req, res, next) => {
     try {
         const foods = await FoodSchema.findAll();

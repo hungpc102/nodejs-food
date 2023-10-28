@@ -1,0 +1,22 @@
+GET http://localhost:3000
+
+###
+POST  http://localhost:3000/cart/create-cart
+Content-Type: application/json
+
+{
+    "USER_ID": 10017,
+    "FOOD_ID": 1024,
+    "QUANTITY": 2
+}
+
+###
+GET http://localhost:3000/cart/get-cart/10017
+
+###
+PATCH http://localhost:3000/cart/update-quantity/10017/1027
+Content-Type: application/json
+
+{
+    "QUANTITY": 7
+}
