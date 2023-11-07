@@ -1,0 +1,12 @@
+GET http://localhost:3000
+
+###
+POST  http://localhost:3000/orderDetail/create-orderDetail
+Content-Type: application/json
+
+{
+    "FOOD_ID":1024, 
+    "UNIT_QUANTITY":2,
+    "ORDER_ID":1003, 
+    "UNIT_PRICE":60000
+}

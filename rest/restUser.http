@@ -33,7 +33,7 @@ DELETE http://localhost:3000/user/logout
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3LCJpYXQiOjE2OTc3Mjk3MTIsImV4cCI6MTcyOTI4NzMxMn0.BxG0K6D8M1hZ1dMb64WyiaqJn2lnfWjT34jHNzk2tEo"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3LCJpYXQiOjE2OTkwMDUxMTIsImV4cCI6MTcwMTU5NzExMn0.wQTSpt12AhMlFnMMnf4nSO7KOTfVfxJFkKDFnOhe1Qk"
 }
 
 ###

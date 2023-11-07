@@ -1,5 +1,6 @@
 const CartSchema = require('../Models/Cart.model')
 
+
 module.exports = {
   createCart: async (req, res, next) => {
     try {
@@ -43,7 +44,7 @@ module.exports = {
   },
   
       getCart:async (req, res, next) => {
-        const { id } = req.params; // Lấy ID từ URL
+        const { id } = req.params; 
         try {
           const cart = await CartSchema.findAll({ where: { USER_ID: id } });
       
@@ -99,5 +100,32 @@ module.exports = {
           next(error);
         }
       },
+      deleteCart:  async (req, res, next) => {
+        try {
+          const userId = req.params.id;
+      
+          const cartItems = await CartSchema.findAll({
+            where: {
+              USER_ID: userId,
+            }
+          });
+      
+          if (cartItems.length === 0) {
+            return res.status(404).json({ error: `Không tìm thấy cart` });
+          }
+      
+          // Xóa từng mục giỏ hàng
+          for (const cartItem of cartItems) {
+            await cartItem.destroy();
+          }
+      
+          return res.status(200).json({
+            status: 'Xoá thành công',
+            elements: 'Xoá thành công'
+          });
+        } catch (error) {
+          next(error);
+        }
+      }
       
 }

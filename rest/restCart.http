@@ -20,3 +20,8 @@ Content-Type: application/json
 {
     "QUANTITY": 7
 }
+
+###
+DELETE  http://localhost:3000/cart/delete-cart/10017
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3LCJpc1Jlc3RhdXJhbnQiOmZhbHNlLCJpYXQiOjE2OTkwMTY3MzMsImV4cCI6MTY5OTAyMzkzM30.O2XXw0SjJuPsaVVap58AtgTXgs_hrggcH913HCTOMkw
+

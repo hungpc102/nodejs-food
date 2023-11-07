@@ -136,7 +136,7 @@ module.exports = {
       // Parse the multipart form data
      // Lấy dữ liệu từ body request
      const { FOOD_NAME, FOOD_INFO, FOOD_PRICE, FOOD_QUANTITY, CATEGORY , FOOD_PICTURE } = req.body;
-      console.log(req.body)
+     
       const imageBuffer = Buffer.from(req.body.FOOD_PICTURE, 'base64');
 
       // Tìm sản phẩm theo ID

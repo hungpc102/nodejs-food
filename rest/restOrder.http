@@ -1,0 +1,25 @@
+GET http://localhost:3000
+
+###
+POST  http://localhost:3000/order/create-order
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3LCJpc1Jlc3RhdXJhbnQiOmZhbHNlLCJpYXQiOjE2OTkwODI2NzAsImV4cCI6MTY5OTA4OTg3MH0.wgejHIN7TIrfO2wDiW6b5uWWR_WiRiWFToAvy_nUav0
+
+{
+    "USER_ID":10017,
+    "ADDRESS":"Hà Nội", 
+    "TOTAL_INVOICE":60000,
+    "SHIPPING_FEE": 20000
+}
+
+###
+GET  http://localhost:3000/order/getAllOrder
+
+###
+PATCH  http://localhost:3000/order/updateOrder/1003
+Content-Type: application/json
+{
+    "ORDER_STATUS": "Delivering"
+}
+
+

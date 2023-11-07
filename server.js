@@ -3,6 +3,8 @@ const app = express()
 const UserRoute = require('./Routes/User.route')
 const FoodRoute = require('./Routes/Food.route')
 const CartRoute = require('./Routes/Cart.route')
+const OrderRoute = require('./Routes/Order.route')
+const OrderDetailRoute = require('./Routes/OrderDetail.route')
 
 const createError = require('http-errors')
 require('dotenv').config()
@@ -23,6 +25,11 @@ app.use('/user', UserRoute)
 app.use('/food', FoodRoute)
 
 app.use('/cart', CartRoute)
+
+app.use('/order', OrderRoute)
+
+app.use('/orderDetail', OrderDetailRoute)
+
 
 
 app.use((req, res, next) => {

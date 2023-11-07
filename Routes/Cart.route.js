@@ -10,4 +10,7 @@ route.get('/get-cart/:id', CartController.getCart)
 
 route.patch('/update-quantity/:user_id/:food_id', CartController.updateQuantityFood);
 
+route.delete('/delete-cart/:id',verifyAccessToken, CartController.deleteCart)
+
+
 module.exports = route;
