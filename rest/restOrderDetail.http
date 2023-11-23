@@ -10,3 +10,6 @@ Content-Type: application/json
     "ORDER_ID":1003, 
     "UNIT_PRICE":60000
 }
+
+###
+GET  http://localhost:3000/orderDetail/getOrderDetail/8025

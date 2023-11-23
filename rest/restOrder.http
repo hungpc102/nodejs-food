@@ -13,13 +13,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3L
 }
 
 ###
-GET  http://localhost:3000/order/getAllOrder
+GET  http://localhost:3000/order/getAllOrder/Pending
 
 ###
-PATCH  http://localhost:3000/order/updateOrder/1003
+PATCH http://localhost:3000/order/updateOrder/6008
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcwMTQsImlzUmVzdGF1cmFudCI6dHJ1ZSwiaWF0IjoxNzAwNTc1NDE3LCJleHAiOjE3MDA1ODI2MTd9.ZQEo7AA-X7EI6tsum8oIRExCT3INMC6v47eq9jJekmI
+
 {
-    "ORDER_STATUS": "Delivering"
+    "ORDER_STATUS": "Delivery"
 }
+
+###
+GET  http://localhost:3000/order/getOrder/10017/Pending
+
+
+###
+GET  http://localhost:3000/order/getOrderById/8025
 
 

@@ -25,7 +25,8 @@ module.exports = {
         }
       },
       getOrderDetail: async (req, res, next) => {
-        const { order_id } = req.params; 
+        const  order_id  = req.params.OrderId; 
+        console.log(order_id)
         try {
           const orderDetails = await OrderDetailSchema.findAll({ where: { ORDER_ID: order_id } });
       
@@ -37,8 +38,7 @@ module.exports = {
           // Trả về dữ liệu cho frontend
           res.json({ orderDetails });
         } catch (error) {
-          console.error('Lỗi khi lấy orderDetail theo order_id:', error);
-          res.status(500).json({ error: 'Đã có lỗi xảy ra' });
+          next(error)
         }
       },
       

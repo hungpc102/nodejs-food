@@ -25,6 +25,8 @@ route.delete('/delete-food/:id',verifyAccessToken, FoodController.deleteFood)
 
 route.put('/update-food/:id',verifyAccessToken, upload.none(), FoodController.updateFood)
 
+route.patch('/update-quantity/:id', verifyAccessToken, FoodController.updateQuantity)
+
 
 
 module.exports = route;

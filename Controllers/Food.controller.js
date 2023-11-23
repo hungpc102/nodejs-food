@@ -169,6 +169,37 @@ module.exports = {
     } catch (error) {
       next(error);
     }
-  }
+  },
+
+  updateQuantity:async (req, res, next) => {
+    try {
+        const foodId = req.params.id 
+        console.log(foodId);
+
+        const { FOOD_QUANTITY } = req.body;
+
+        const food = await FoodSchema.findByPk(foodId);
+
+        if (!food) {
+            return res.status(404).json({
+                status: 'error',
+                message: 'Sản phẩm không tồn tại',
+            });
+        }
+
+        food.FOOD_QUANTITY += FOOD_QUANTITY;
+
+        // Lưu lại thông tin sản phẩm đã cập nhật
+        await food.save();
+
+        return res.status(200).json({
+            status: 'okay',
+            message: 'Số lượng sản phẩm đã được cập nhật',
+            updatedProduct: food,
+        });
+    } catch (error) {
+        next(error);
+    }
+},
 
 }

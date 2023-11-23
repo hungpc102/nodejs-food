@@ -46,3 +46,12 @@ Content-Type: multipart/form-data
     "FOOD_QUANTITY": 200,
     "CATEGORY": "koko"  
 }
+
+###
+PATCH http://localhost:3000/food/update-quantity/1024
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDE3LCJpc1Jlc3RhdXJhbnQiOmZhbHNlLCJpYXQiOjE2OTk5NDg4NDAsImV4cCI6MTY5OTk1NjA0MH0.MQhxvct2ifzHgZNg8-3Re5X7TGQNPElDVXsyhCKlzok
+Content-Type: application/json
+
+{
+    "FOOD_QUANTITY": 20
+}

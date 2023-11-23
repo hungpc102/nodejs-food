@@ -35,10 +35,31 @@ const OrderSchema = sequelize.define('ORDERS', {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        ORDER_NAME:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        TOTAL_PAYMENT:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            field: 'createdAt' // Tên trường trong cơ sở dữ liệu
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            field: 'updatedAt' // Tên trường trong cơ sở dữ liệu
+        }
     },
     {
         tableName: 'ORDERS',
-        timestamps: false, 
+        timestamps: true, 
+        createdAt: 'createdAt', // Tên trường trong cơ sở dữ liệu
+        updatedAt: 'updatedAt' // Tên trường trong cơ sở dữ liệu
+
     }
 )
 

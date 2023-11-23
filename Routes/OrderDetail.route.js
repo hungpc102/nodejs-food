@@ -6,4 +6,6 @@ const OrderDetailController = require('../Controllers/OrderDetail.controller')
 
 route.post('/create-orderDetail',verifyAccessToken, OrderDetailController.createOrderDetail)
 
+route.get('/getOrderDetail/:OrderId', OrderDetailController.getOrderDetail)
+
 module.exports = route;
